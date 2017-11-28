@@ -4,13 +4,6 @@ subtitle: "Projeto de Pesquisa"
 author: "Carlos Kauê Vieira Braga"
 date: "Programa de Pós-Graduação em Engenharia de Transportes (PETRAN)" 
 output:
-  pdf_document:
-          number_sections: yes
-          toc: no
-          fig_caption: yes
-          keep_tex: yes
-          includes:
-            in_header: header.tex
   html_notebook:
     fig_caption: yes
     number_sections: yes
@@ -19,11 +12,18 @@ output:
     toc_float:
       collapsed: no
       smooth_scroll: no
+  pdf_document:
+          number_sections: yes
+          toc: no
+          fig_caption: yes
+          keep_tex: yes
+          includes:
+            in_header: header.tex
 bibliography: referencias_dissertacao.bib
 csl: associacao-brasileira-de-normas-tecnicas-ufrgs2.csl
 ---
 
-#Introdução
+# Introdução
 
 Cada vez mais têm se dados ênfase ao transporte em massa (*transit*), entendendo-se que o modelo de transporte por veículo individual, criado no cenários pós Segunda Guerra Mundial, é insustentável para as cidades e para o planeta. Os centros urbanos não conseguem suportar um estilo de vida em que cada habitante se locomova para o trabalho em seu transporte individual, ocasionando congestionamentos e poluição de diversos tipos [@VanLierop2017].
 
@@ -35,7 +35,7 @@ Há uma grande disponibilidade de bases de dados com um grande potencial para o 
 
 Levando em consideração que é buscado um desenvolvimento sustentável das cidades com a utilização de transporte em massa, entende-se que a melhora do sistema de transporte público é desejável. Portanto, busca-se entender essa problemática de acessibilidade e mobilidade do transporte público utilizando-se a grande quantidade de dados disponíveis para os gestores.
 
-##Problemática
+## Problemática
 
 Há uma diferença de acessibilidade e mobilidade entre os usuários do transporte público de Fortaleza dependendo de onde o usuário mora.
 
@@ -43,7 +43,7 @@ Não existe um método para calcular indicadores para caracterização da proble
 
 Ainda não existe um método de caracterização e diagnóstico da problemática que seja baseado na análise de *big data*. 
 
-#Questões de pesquisa
+# Questões de pesquisa
 
 - Há uma diferença de acessibilidade e mobilidade por transporte público dependendo da localização da moradia dos usuários?
 - Como integrar as bases de dados disponíveis de transporte público e tratá-las para obtenção de indicadores úteis na compreensão da problemática?
@@ -53,17 +53,17 @@ Ainda não existe um método de caracterização e diagnóstico da problemática
 
 [//]: (Provavelmente há algum tipo de *overlap* entre as questões, considerar isso também né!)
 
-#Objetivos
+# Objetivos
 
 Objetivo geral é compreender a problemática da falta de acessibilidade e mobilidade por transporte público em Fortaleza através do uso de ferramentas de *big data*. Os objetivos específicos são:
 
-1) Consolidar bases de dados de transporte público de Fortaleza; 
-1) Identificar e contextualizar a problemática da falta de acessibilidade e mobilidade no espaço dos usuários de transporte público de Fortaleza, confirmando a hipótese de que há uma falta de acessibilidade e mobilidade;
+- ~~Consolidar bases de dados de transporte público de Fortaleza;~~ Essa etapa vai ficar para dentro do método de caracterização; 
+1) Identificar e contextualizar a problemática da falta de acessibilidade e mobilidade no espaço dos usuários de transporte público de Fortaleza, fazendo crítica das representações já propostas;
 1) Propor método de caracterização com *big data*, com a provável proposição de método para o cálculo de indicadores para transporte público;
 1) Propor método de diagnóstico com *big data*;
 1) Aplicar métodos estabelecidos para a cidade de Fortaleza.
 
-#Metodologia
+# Metodologia
 
 De acordo com os objetivos estabelecidos, foi escolhida uma metodologia que tornasse possível alcançar esses objetivos da melhor forma.
 
@@ -82,7 +82,7 @@ Por fim, é feita uma aplicação da metodologia proposta para a cidade de Forta
 - A proposição de métodos para cálculo de indicadores deve estar presente dentro do método de caracterização  e diagnóstico ou fora?
 - A parte toda da consolidação de dados deve estar dentro da parte da proposição metodológica ou não?
 
-#Revisão da Literatura
+# Revisão da Literatura
 
 A revisão da literatura consistirá em três etapas principais: na primeira, será feita uma contextualização da problemática da falta de acessibilidade e mobilidade por transporte público na cidade de Fortaleza. Na segunda, será feita uma revisão sobre métodos de compreensão da problemática de sistema de transportes. ~~Aqui, cabe uma análise exploratória dos dados coletados de transporte público~~ (*isso ja seria na parte da aplicacao da metodologia, certo?*). Na terceira, estudos já realizados utilizando ferramentas de *big data* para obtenção de indicadores de transporte público serão analisados, avaliando se é possível a proposição de novos métodos para cálculo de indicadores. 
 
@@ -90,7 +90,7 @@ O objetivo da primeira parte é contextualizar a problemática em análise, aval
 
 Já as duas últimas partes tem como principal objetivo confirmar as lacunas existentes que foram supostas nas questões de pesquisa, onde a segunda parte vai confirmar lacunas referentes a metodos de caracterização e diagnóstico da problemática com a utilização de ferramentas de *big data*, e a terceira parte referente ao cálculo de indicadores.  
 
-##Contextualização da Problemática da Acessibilidade e Mobilidade por Transporte Público
+## Contextualização da Problemática da Acessibilidade e Mobilidade por Transporte Público
 
 A representação da problemática proposta por @Lima2017 poderá ser utilizada para a caracterização e diagnóstico. Essa representação, que foca nos problemas do subsistema de transportes, é apresentada na Figura \ref{arvore}. Observa-se que a árvore apresenta todos os problemas com as suas respectivas relações de causa e efeito, representadas pelas setas e suas direções. 
 
@@ -98,7 +98,7 @@ A representação da problemática proposta por @Lima2017 poderá ser utilizada 
 
 A priori, as relações de causa e efeito que se tem interesse são as que tem inseridas o transporte público como modo principal. Posteriormente, será analisada a possibilidade de diagnosticar relações que contenham também outros modos como o transporte individual, onde também a disponibilidade de *big data* pode ser útil.
 
-##Métodos de Compreensão da Problemática de Sistemas de Transporte
+## Métodos de Compreensão da Problemática de Sistemas de Transporte
 
 O método de compreensão da problemática estabelecido por @Soares2014 apresenta-se dividido em três etapas princiapais: identificação, caracterização e diagnóstico da problemática, como mostrado na Figura \ref{fig1}. 
 
@@ -106,11 +106,27 @@ O método de compreensão da problemática estabelecido por @Soares2014 apresent
 
 Também existem os métodos de @Lima2017, @Andrade2016 e @Henrique2004, sendo o último mais focado no transporte público de Fortaleza.
 
-##Indicadores de transporte público a partir de *big data*
+## Quais os indicadores propostos?
+
+Aqui, fazer uma revisão dos indicadores já propostos na literatura. Incluir indicadores propostos pela literatura do big data também. **ATENÇÃO**: esses indicadores tem que ser úteis no processo de compreensão da problemática! Não somente citar os indicadores! Tem que ser úteis! 
+
+### Limitações dos métodos de compreensão no cálculo dos indicadores
+
+Aqui, apontar uma limitação no cálculo desses indicadores, citando que a maioria deles é modelado e não observado, e como o big data pode entrar para superar essas limitações.
+
+Há dificuldade para caracterizar a problemática com os indicadores atuais. É necessário calcular indicadores de forma mais eficiente. Ai é que entra o *bid data*.
+
+### Indicadores de transporte público a partir de *big data*
+
+Aqui, sim, falar da possibilidade de cálculo dos indicadores propostos acima com o uso de *big data*. Se quiser propor algum novo indicador, citar na parte da proposição da nova metodologia. 
 
 Trabalhos de @Kusakabe2014, @Robinson2014, @Alsger2016, @Barry2002a, @Kurauchi2016 e @Farzin2008a.
 
-#Resultados esperados
+## Diferenças entre base de dados do TP de Fortaleza com base de dados utilizadas em outros trabalhos
+
+Aqui, falar sobre a diferença que existe na base de dados dos outros indicadores de big data com os big data de Fortaleza. 
+
+# Resultados esperados
 
 Os resultados esperados do trabalho são:
 
@@ -118,7 +134,7 @@ Os resultados esperados do trabalho são:
 - Métodos de caracterização e diagnóstico da problemática do sistema de transportes focados na análise de *big data*, com a possível criação também de métodos de cálculos de indicadores a partir dos dados consolidados. É entendido que esse método possa se extender além do caso específico dos dados de transporte público;
 - A problemática de acessibilidade e mobilidade de transporte público na cidade de Fortaleza compreendida de acordo com a metodologia estabelecida nesse trabalho.
 
-#Cronograma
+# Cronograma
 
 \section*{Referências}
 
