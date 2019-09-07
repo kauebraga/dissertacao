@@ -1,0 +1,145 @@
+\documentclass[        
+    a4paper,          % Tamanho da folha A4
+    12pt,             % Tamanho da fonte 12pt
+    chapter=TITLE,    % Todos os capitulos devem ter caixa alta
+    section=Title,    % Todas as secoes devem ter caixa alta somente na primeira letra
+    subsection=Title, % Todas as subsecoes devem ter caixa alta somente na primeira letra
+    oneside,          % Usada para impressao em apenas uma face do papel
+    english,          % Hifenizacoes em ingles
+    spanish,          % Hifenizacoes em espanhol
+    brazil,           % Ultimo idioma eh o idioma padrao do documento
+    fleqn             % Comente esta linha se quiser centralizar as equacoes. Comente também a linha 65 abaixo
+]{abntex2}
+
+\input{lib/preambulo}
+
+\setlength{\mathindent}{0pt} %Complementa o alinhamento de equações para totalmente a esquerda.
+
+\trabalhoacademico{dissertacao}
+
+
+% Coloque 'nao' para versao final do trabalho
+
+\ehqualificacao{nao}
+
+% Remove as bordas vermelhas e verdes do PDF gerado
+% Coloque 'sim' pare remover
+
+\removerbordasdohyperlink{sim} 
+
+% Adiciona a cor Azul a todos os hyperlinks
+
+\cordohyperlink{nao}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%         Informacao sobre a instituicao          %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\ies{Universidade Federal do Ceará}
+\iessigla{UFC}
+\centro{Centro de Tecnologia}
+\departamento{Departamento de Engenharia de Transportes}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%         Informacao para Dissertacao             %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\programamestrado{Programa de Pós-Graduação em Engenharia de Transportes}
+\nomedomestrado{Mestrado Acadêmico em Engenharia de Transportes}
+\mestreem{Engenharia de Transportes}
+\areadeconcentracaomestrado{Engenharia}
+
+% AVISO: Caso necessario alterar o texto de apresenta-
+% cao da dissertacao, ir a pasta "lib", arquivo 
+% "ufctex.sty" na linha 511.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%      Informacoes relacionadas ao trabalho       %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\autor{$author$}
+\titulo{$title$}
+\data{$date$}
+\local{$local$}
+
+% Exemplo: \dataaprovacao{01 de Janeiro de 2012}
+\dataaprovacao{}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%           Informação sobre o Orientador         %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\orientador{$orientador$}
+\orientadories{Universidade Federal do Ceará (UFC)}
+\orientadorcentro{Centro de Ciências e Tecnologia (CCT)}
+\orientadorfeminino{nao} % Coloque 'sim' se for do sexo feminino
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%              Informação sobre a banca           %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Atenção! Deixe em branco o nome do membro da banca para remover da folha de aprovacao
+
+% Exemplo de uso:
+% \membrodabancadois{Prof. Dr. Fulano de Tal}
+% \membrodabancadoisies{Universidade Federal do Ceará - UFC}
+
+
+\membrodabancadois{Prof. Dr. Francisco Moraes de Oliveira Neto}
+\membrodabancadoiscentro{Departamento de Engenharia de Transportes (DET)}
+\membrodabancadoisies{Universidade Federal do Ceará (UFC)}
+\membrodabancatres{Profa. Dra. Mariana Abrantes Giannotti}
+\membrodabancatrescentro{Escola Politécnica da Universidade de São Paulo}
+\membrodabancatresies{Universidade de São Paulo (USP)}
+
+$if(highlighting-macros)$
+$highlighting-macros$
+$endif$
+
+$if(verbatim-in-note)$
+\usepackage{fancyvrb}
+$endif$
+
+\definecolor{bgcolor}{HTML}{F0E8E7}
+\let\oldtexttt\texttt
+
+\renewcommand{\texttt}[1]{
+  \colorbox{bgcolor}{\oldtexttt{#1}}
+}
+
+
+\begin{document}
+
+	% Elementos pré-textuais
+	\imprimircapa
+	\imprimirfolhaderosto{}
+	\imprimirfichacatalografica{1-pre-textuais/ficha-catalografica}
+	% %\imprimirerrata{elementos-pre-textuais/errata}
+	\imprimirfolhadeaprovacao
+	% \imprimirdedicatoria{1-pre-textuais/dedicatoria}
+	\imprimiragradecimentos{1-pre-textuais/agradecimentos}
+	% \imprimirepigrafe{1-pre-textuais/epigrafe}
+	\imprimirresumo{1-pre-textuais/resumo}
+	\imprimirabstract{1-pre-textuais/abstract}
+	\renewcommand*\listfigurename{Lista de Figuras} %Se você comentar esta linha o título da lista fica: LISTA DE ILUSTRAÇÕES
+	\imprimirlistadeilustracoes
+	\imprimirlistadetabelas
+	%\imprimirlistadequadros
+	%\imprimirlistadealgoritmos
+	%\imprimirlistadecodigosfonte
+	% \imprimirlistadeabreviaturasesiglas
+	% \imprimirlistadesimbolos{1-pre-textuais/lista-de-simbolos}   
+	\imprimirsumario
+	
+	\setcounter{table}{0}% Deixe este comando antes da primeira tabela.
+	
+	\textual
+  $body$
+  
+  %Elementos pós-textuais	
+	\bibliography{lib/library.bib}
+
+
+\end{document}
+

@@ -1,0 +1,5 @@
+bookdown::pdf_book: 
+  template: lib/template.tex
+  pandoc_args: --top-level-division=chapter
+  keep_tex: true
+  citation_package: natbib

@@ -1,0 +1,6 @@
+rmd_files: ["01_introducao.Rmd", "02_revisao.Rmd", "03_consolidacao.Rmd", "04_metodo.Rmd", "05_resultados.Rmd", 
+"06_conclusao.Rmd"]
+book_filename: "braga_dissertacao_2019.Rmd"
+output_dir: "output_dissertacao"
+delete_merged_file: TRUE
+

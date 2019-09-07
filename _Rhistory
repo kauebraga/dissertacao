@@ -1,0 +1,35 @@
+install.packages("pdftools")
+install.packages("pdftools")
+R.version
+install.packages("tm")
+install.packages("pdftools")
+devtools::install_github("ropensci/pdftools")
+install.packages("pdftools")
+install.packages("tidyr")
+setRepositories()
+install.packages("pdftools", type = "source")
+install.packages("pdftools", dependencies=TRUE, repos='http://cran.rstudio.com/')
+library(pdftools)
+txt <- pdf_text("Braga (2018) - Qualificação.pdf")
+cat(txt[1])
+cat(txt[27])
+install.packages("caTools", dependencies=TRUE, repos='http://cran.rstudio.com/')
+pdftools::pdf_toc("Braga (2018) - Qualificação.pdf")
+cat(txt[27])
+toc <- pdf_toc("Braga (2018) - Qualificação.pdf")
+jsonlite::toJSON(toc, auto_unbox = TRUE, pretty = TRUE)
+vai <- cat(txt[27])
+writeClipboard(cat(txt[27]))
+txt[27]
+cat(txt[27:30])
+# cap 2
+cat(txt[15:32])
+# cap 2
+cat(txt[15:35])
+?cat
+knitr::opts_chunk$set(echo = TRUE)
+cat(txt[15:35])
+txt[15]
+cat(txt[15])
+?tolower
+tolower("BIG DATA DE TRANSPORTE PÚBLICO E INDICADORES NO PLANEJAMENTO URBANO")
