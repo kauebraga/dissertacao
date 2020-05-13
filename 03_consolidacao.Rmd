@@ -20,10 +20,8 @@ Após tentativas frustradas de organização dos serviços de transporte públic
 include_graphics('figure/3-sitfor.jpg')
 ```
 
-### Sistema de Bilhetagem Eletrônica E AVL de Fortaleza
 
-
-O SIT-FOR têm um sistema aberto de bilhetagem eletrônica (usuários só validam no embarque) que registra a passagem de todos os usuários pela catraca dos veículos. Os tipos de pagamentos utilizados podem ser por bilhete único de vale transporte, carteira de estudante (mostrados na Figura \ref{fig:bu}), gratuidade de idosos, deficientes e funcionários, e inteira (pagamento por dinheiro). Já o sistema de *Automated Vehicle Location* (Localização automática de veículos) consiste na presença de equipamentos de GPS em todos os veículos da frota de transporte público de Fortaleza. O sistema registra a localização de cada veículo em média a 30 segundos quando o veículo está ligado.
+No que se refere ao seu sistema que gera o *big data*, O SIT-FOR têm um sistema aberto de bilhetagem eletrônica (usuários só validam no embarque) que registra a passagem de todos os usuários pela catraca dos veículos. Os tipos de pagamentos utilizados podem ser por bilhete único de vale transporte, carteira de estudante (mostrados na Figura \ref{fig:bu}), gratuidade de idosos, deficientes e funcionários, e inteira (pagamento por dinheiro). Já o sistema de *Automated Vehicle Location* (Localização automática de veículos) consiste na presença de equipamentos de GPS em todos os veículos da frota de transporte público de Fortaleza. O sistema registra a localização de cada veículo em média a 30 segundos quando o veículo está ligado.
 
 ```{r bu, fig.cap = "Cartões de Bilhetagem Eletrônica do SIT-FOR", fig.subcap = "Prefeitura de Fortaleza"}
 
@@ -31,7 +29,7 @@ include_graphics('figure/3-bu.jpg')
 
 ```
 
-## Tratamento inicial dos dados
+## Método de tratamento inicial dos dados
 
 O tratamento inicial dos dados busca converter os dados brutos para um formato sem informações desnecessárias e com as colunas nomeadas. A Figura \ref{fig:cons-tratamento-inicial} descreve as principais etapas.
   
@@ -42,10 +40,9 @@ include_graphics('figure/3-tratamento_inicial.png')
 ```
 
 
-### Dados de smartcard
+### Dados de bilhetagem
 
 Os dados brutos de bilhetagem contém 9 colunas, sendo originalmente divididos por dia. Por meio de informações fornecidas pelo órgão fornecedor dos dados, foi possível nomear as colunas de acordo com o seu conteúdo:
-
 
 * *id*: representa o código Siom do usuário, que é o código que identifica o usuário do cartão;
 * *linha*: representa o código da linha onde aconteceu a validação;
@@ -56,7 +53,6 @@ Os dados brutos de bilhetagem contém 9 colunas, sendo originalmente divididos p
 * *nome_cartao*: nome do tipo de cartão utilizado;
 * *sentido_viagem*: o sentido da viagem (ida ou volta);
 * *integracao*: se a viagem foi uma integração ou não.
-
 
 A coluna tipo_cartao contém 9 tipos de pagamento diferentes. É simplificada para quatro tipos principais: *vale transporte*, *carteira de estudante*, *gratuidade* e *inteira*. As colunas *nome_linha* e *nome_cartao* são removidas por conterem informações correspondentes nas colunas *linha* e *tipo_cartao*. A Tabela \ref{tab:bi_sample} apresenta uma amostra desses dados já com a nomeação das colunas.
   
@@ -193,8 +189,7 @@ O SIT-FOR registra informações dos usuários no momento que estes se registram
 
 A consolidação dessa base busca 1) renomear a coluna da identificação do bilhete único para o mesmo nome da bilhetagem (``id``); 2) transformar a data de nascimento em formato padrão ISO-8601 (ano-mes-dia hora:minuto:segundo).
 
-## Integração da base da bilhetagem e GPS
-
+## Método proposto de integração da base da bilhetagem e GPS
 
 Há uma relação de dependência mútua dos dados de bilhetagem e GPS. Os dados de bilhetagem não apresentam a localização da validação, enquanto os dados de GPS não apresentam a linha que aquele veículo está servindo naquele ponto. Dessa forma, a integração permite utilizar os dados de GPS para determinar o local mais provável de cada validação na bilhetagem e permite utilizar os dados de bilhetagem para adicionar a informação da linha a qual aquele carro está servindo no GPS.
 
@@ -260,8 +255,7 @@ include_graphics('figure/3-buffer_terminais.jpg')
   
 A base consolidada e integrada então é uma base filtrada, contando somente com os pontos que servem à linha, com a adição da coluna da `linha` e de uma outra coluna que informa se aquele ponto de GPS está na linha ou no começo/final dela.
 
-
-## Resultados
+## Aplicação do método
 
 O método de consolidação foi aplicada para o dados do mês de setembro de 2019 para os dados de bilhetagem e GPS e para o GTFS da primeira semana de setembro. Esse mês foi escolhido porque representa uma época mais distante das férias de julho e já incorpora mudanças operacionais importantes como a validação sendo realizada pela parte da frente do veículo (entende-se que isso motiva o usuário a validar ao entrar no ônibus, porque ele tem menos espaço para aguardar).
 

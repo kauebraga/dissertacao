@@ -137,7 +137,8 @@ Até a metade da década de 2000, a estimação de indicadores de acessibilidade
 
 
 Pensando nessas limitações, @Lei2010 estabeleceram métodos conceituais e computacionais para a utilização da tabela de horários de um sistema de transporte público para estimar com maior precisão o tempo de viagem entre pares origem destino. O trabalho buscou definir explicitamente cada etapa do deslocamento por transporte público no seu método:
-* Primeiramente, são especificadas as coordenadas da origem e destino e o horário de partida da viagem;  
+
+* Primeiramente, são especificadas as coordenadas da origem e destino e o horário de partida da viagem;
 * É assumido que o usuário vai caminhar do ponto de origem até a rua mais próxima;
 * A partir dessa rua mais próxima, é calculado (através de um algoritmo Dijkstra de caminho mínimo) o menor tempo de viagem até o ponto de destino, considerando: o tempo de caminhada à parada, o tempo de espera pelo veículo, o tempo de espera por possíveis integrações, e o tempo de caminhada até o ponto de destino.
 
@@ -215,12 +216,9 @@ Neste trabalho, com um objetivo de fazer análise *ex-post* de faixas exclusivas
 
 A principal limitação identificada no trabalho foi o método para estimar o tempo de passagem de cada veículo pelas paradas da linha. O autor associou o registro de GPS mais próximo de cada parada como sendo o horário associado, utilizando um limite de 200 metros (em distância euclidiana) para julgar se aquela associação foi válida ou não. Isso significa que um registro de GPS com até 200 metros de distância da parada pode ser utilizado, o que pode acarretar erros de estimação.
 
-
-Outra limitação do método de tratamento dos dados de GPS foi que, para evitar problemas, o autor não considerou as paradas extremas (de fim e de começo da viagem). Isso pode ser problemático especialmente em áreas de terminais, onde há um grande fluxo de veículos e onde atrasos e altos tempos de viagem são comuns. Além disso, não foi deixado claro se foi estabelecido um método para identificar o sentido da viagem, ou se essa informação já seria disponibiliza automaticamente.
-
+Outra limitação do método de tratamento dos dados de GPS foi que, para evitar problemas, o autor não considerou as paradas extremas (de fim e de começo da viagem). Isso pode ser problemático especialmente em áreas de terminais, onde há um grande fluxo de veículos e onde atrasos e altos tempos de viagem são comuns.
 
 Com isso, o autor pôde estimar tempos de viagem (entre zonas de tráfego) com o uso do software *ArcGis* e calcular e analisar indicadores de acessibilidade, mas não fez uma análise comparativa da acessibilidade com o GTFS programado e com o GTFS empírico. 
-
 
 No que se refere à fonte de dados, a principal diferença entre os trabalhos de @Wessel2017 e @Arbex2016a está no fato de que o primeiro contou com dados de GPS que eram coletados em tempo real de um serviço, através de uma API, que já contava com informações de viagem e sentido da linha, enquanto que o último contou com dados arquivados de GPS, com mais carência de informações. Essa diferença levou o trabalho de @Arbex2016a, na tentativa de obter informações já disponíveis ao trabalho de @Wessel2017, a adotar uma metodologia de geoprocessamento dos dados de GPS mais extensa e elaborada, trazendo mais contribuições para a aŕea.
 
@@ -228,8 +226,7 @@ No que se refere à fonte de dados, a principal diferença entre os trabalhos de
 O serviço de dados de GPS utilizado por @Wessel2017 está presente em mais de 50 cidades, porém concentrado nos Estados Unidos, Canadá e Austrália (informação coletada em agosto de 2019 no site  https://nextbus.cubic.com/Our-Customers/Around-the-World). Identifica-se, portanto, que a metodologia desenvolvida no trabalho de @Arbex2016a pode ser mais útil para a realidade dos demais países (especialmente países emergentes), onde a tendência é a disponibilização de dados de GPS arquivados e carentes de informações.
 
 
-Outro aspecto importante a ser ressaltado é como foi feita a agregação temporal dos dados. @Wessel2017 teve acesso a localização de todos os veículos do sistema por 2 dias, com exceção das linhas de alta capacidade, que o autor utilizou os dados programados. Então calcularam a acessibilidade para o serviço observado nesses dias, por fim fazendo uma acessibilidade média dessa amostra. @Arbex2016a aplicaram seu algoritmo para 20 dias úteis, mas não foi explicitado como os tempos estimados entre paradas foram agregados para um arquivo consolidado de *stop_times.txt*.
-
+Outro aspecto importante a ser ressaltado é como foi feita a agregação temporal dos dados. @Wessel2017 teve acesso a localização de todos os veículos do sistema por 2 dias, com exceção das linhas de alta capacidade, que o autor utilizou os dados programados. Então calcularam a acessibilidade para o serviço observado nesses dias, por fim fazendo uma acessibilidade média dessa amostra. @Arbex2016a aplicaram seu algoritmo para 20 dias úteis, mas não foi explicitado como os tempos estimados entre paradas foram agregados.
 
 Esses são os trabalhos encontrados que realizaram uma transformação de dados de localização da frota em dados *stop_times* do GTFS, trazendo informações empíricas de tempo de viagem. Outros trabalhos, apesar de não terem feito uma tradução completa dos dados de GPS em dados *stop_times*, propuseram métodos para geoprocessar dados de GPS com uso dos dados de GTFS, estimando informações importantes de serviço. Como exemplo, destaca-se o trabalho de @Rabay2017, que utilizou os dados de GPS para estimar velocidades operacionais em trechos de algumas linhas, e merece uma atenção especial.
 

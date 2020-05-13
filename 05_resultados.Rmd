@@ -1,4 +1,4 @@
-# Resultados
+# Discussão dos resultados
 
 Este capítulo busca alcançar os três últimos objetivos do trabalho, mostrando os principais resultados advindos da aplicação do método do capítulo anterior e a importância do mesmo. Os resultados são apresentados e as hipóteses são discutidas individualmente, analisando o impacto da variabilidade da acessibilidade na avaliação de políticas públicas. Por fim, é feita uma discussão geral dos resultados com a análise de como os resultados encontrados nesse capítulo se diferem dos encontrados na literatura.
 
@@ -108,7 +108,7 @@ include_graphics('figure/5-resultado_otp.png')
 Com as matrizes de tempo de viagem estimadas, parte-se para o cálculo dos indicadores de acessibilidade. Primeiramente, entretanto, é necessário estimar os tempos limites a serem utilizados.
 
 
-### Estimação dos tempo limite a partir da bilhetagem
+### Estimação dos tempos limite a partir da bilhetagem
 
 
 A distribuição dos tempos de viagem estimados de cada usuários para os motivos trabalho (utilizaram vale transporte) e educação (utilizaram carteira de estudante) é mostrada na Figura \ref{fig:bi_tt_bp}. No total, foi coletada uma amostra em hora pico de 65 mil viagens para motivo trabalho e 10 mil viagens para motivo educação. Como esperado, a distribuição do tempo de viagem para trabalho tende a valores maiores que para viagens de educação. Como determinado na metodologia, será utilizado o percentil 75 como o tempo limite do indicador respectivo de cada atividade. Pelo gŕáfico, é identificado que esse valor é aproximadamente **65 minutos** para trabalho e **50 minutos** para educação.
@@ -146,7 +146,7 @@ A Figura \ref{fig:h1_et} mostra a acessibilidade corrigida x programada para ati
 include_graphics('figure/5-resultado_acess_et_corrxprogr_sp.png')
 ```
 
-Analisando espacialmente como isso acontece, a Figura \ref{fig:h1_et_map} distribui a diferença relativa (os valores extremos foram encurtados para +- 50%). Como observado, a diferença tende a ser menor nas áreas de maior concentração de atividades de educação - no eixo oeste da cidade - pelo mesmo motivo das atividade de trabalho. Valores extremos de diferença continuaram sua tendência de estarem nas bordas. O isolamento espacial somado à baixa frequência de transporte público deixa a acessibilidade dessas zonas muito suscetíveis à variações na chegada e no tempo de deslocamento dos ônibus - que é o que acontece quando é utilizado o GTFS corrigido em vez do programado. A acessibilidade para educação apresenta uma variação menor, com mediana de +3%, percentil 25 de -5% e percentil 75 de 12%.
+Analisando espacialmente como isso acontece, a Figura \ref{fig:h1_et_map} distribui a diferença relativa (os valores extremos no mapa foram encurtados para +- 50%). Como observado, a diferença tende a ser menor nas áreas de maior concentração de atividades de educação - no eixo oeste da cidade - pelo mesmo motivo das atividade de trabalho. Valores extremos de diferença continuaram sua tendência de estarem nas bordas. O isolamento espacial somado à baixa frequência de transporte público deixa a acessibilidade dessas zonas muito suscetíveis à variações na chegada e no tempo de deslocamento dos ônibus - que é o que acontece quando é utilizado o GTFS corrigido em vez do programado. A acessibilidade para educação apresenta uma variação menor, com mediana de +3%, percentil 25 de -5% e percentil 75 de 12%.
 
 ``` {r h1_et_map, fig.cap = "Distribuição espacial da diferença relativa de acessibilidade entre GTFS Programado e Corrigido para educação"}
 
@@ -174,6 +174,7 @@ Para mostrar como essa grande diferença de acessibilidade acontece, foi selecio
 include_graphics('figure/5-acess_extremo_padraoxp50_fim.png')
 ```
   
+Os resultados também confirmam uma limitação que foi levantada no capítulo anterior: a do tamanho da amostra de horas de partida. Para a maioria das localidades, especialmente as zonas mais centrais, que tem uma boa frequência de serviço, é entendido que essa amostra a cada 15 minutos satisfaz. Porém, essa limitação é mais clara na análise da diferença relativa de acessibilidade entre os cenários da hipótese 1, para as zonas mais periféricas. Uma amostra maior (a cada 5 minutos, por exemplo) tenderia a suavizar e consolidar os valores de variação para as zonas mais distantes (que têm uma menor frequência de transporte público).
 
 É possível analisar como a utilização de dados empíricos da frota poderia impactar a tomada de decisões em intervenções no sistema de transporte. Como observado, para trabalho, dados de GTFS Programado tendem a superestimar a acessibilidade em zonas de entrada do centro da cidade em até 100 mil empregos. Intervenções e análises a partir desses dados tenderiam a superestimar esses valores, podendo levar à decisões de intervenções equivocadas. Um exemplo que pode ser dado é sobre a questão de intervir construindo um corredor misto de transporte em vez de um corredor exclusivo de ônibus. Num contexto de horários programados, uma análise *ex-post* poderia concluir que houve ganhos de acessibilidade bem semelhantes entre as alternativas, visto que os horários programados tendem a não incorporar informações de *bus bunching* e consequentes atrasos. Quando horários empíricos são incorporados, a diferença entre um cenário de tráfego misto e tráfego exclusivo só de ônibus tende a ser incorporada de forma mais correta.
 
@@ -237,17 +238,7 @@ Para o tomador de decisão, as análise realizadas primeiramente mostram a impor
 
 Num contexto de análise das intervenções, o teste da hipótese mostra a importância de se levar em consideração diversos tempos de partida nas avaliações. O impacto da utilização de poucos horários de partida na avaliação é pequeno para áreas que têm alta frequência de transporte público, mas pode ser decisivo para áreas de baixa frequência. 
 
-
-## Discussões gerais
-
-
-A etapa da reconstrução da tabela de horários *stop_times.txt* utilizou uma amostra de dados de GPS que foi advinda da etapa de consolidação. Essa amostra já contava com a exclusão de algumas linhas integralmente (principalmente linhas complementares) e outras parcialmente. Na metodologia, os tempos de viagem coletados foram agrupados por intervalo de 15 minutos e trecho, e 17% tiveram uma amostra menor que 10 observações e foram deletadas. Essas duas situações de descarte de amostra tendem a ter um viés, visto que ocorrem em locais periféricos de menor frequência. Para esses casos (trechos) onde não foi possível estimar o tempo de viagem, foi utilizado o valor programado do GTFS. Isso pode ser identificado como a principal limitação nessa etapa do trabalho. 
-
-Os resultados encontrados mostram a importância que os horários empíricos e sua dispersão tem na variabilidade da acessibilidade quando a distribuição de diferentes atividades são levadas em consideração. As atividades de trabalho são mais concentradas no centro da cidade, o que ocasiona um grande fluxo no sentido periferia-centro, que leva a altos e imprevisíveis tempos de viagens por transporte público. Assim, os veículos têm uma pontualidade menor (causando os resultados mostrados na hipótese 1) e uma variabilidade no tempo de viagem maior (causando os resultados mostrados na hipótese 2). Quando as atividades de educação são consideradas, acontece uma inversão no cenário. Essas atividades, menos concentradas na região central, assumem fluxos de acesso em sentidos opostos ao do pico trabalho da manhã, resultando em vias de acesso menos congestionadas e mais previsíveis. Isso é refletido na avaliação da hipótese 2 para essa atividade: a maior pontualidade dos veículos leva a uma menor variação entre os cenários. 
-
-Os resultados também confirmam uma limitação que foi levantada no capítulo anterior: a do tamanho da amostra de horas de partida. Para a maioria das localidades, especialmente as zonas mais centrais, que tem uma boa frequência de serviço, é entendido que essa amostra a cada 15 minutos satisfaz. Porém, essa limitação é mais clara na análise da diferença relativa de acessibilidade entre os cenários da hipótese 1, para as zonas mais periféricas. Uma amostra maior (a cada 5 minutos, por exemplo) tenderia a suavizar e consolidar os valores de variação para as zonas mais distantes (que têm uma menor frequência de transporte público).
-
-### Comparação com resultados encontrados na literatura
+## Comparação com resultados encontrados na literatura
 
 Como visto nas Figuras \ref{fig:resultado_correcao_gtfs} e \ref{fig:resultado_otp}, há uma simetria entre horários programados x corrigidos e tempos estimados entre pares de origem destino a partir do GTFS Programado x GTFS Corrigido. Esse resultado é semelhante ao encontrado pelo trabalho de @Wessel2019, que fez a mesma avaliação para quatro sistemas de transporte público diferentes da América do Norte. 
 

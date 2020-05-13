@@ -1,10 +1,9 @@
-# Método para análise da variabilidade da acessibilidade por transporte público com o uso de *big data*
-
+# Proposta metodológica para análise da variabilidade da acessibilidade
 
 Esse capítulo busca estabelecer métodos para alcançar os três últimos objetivos do trabalho. Para isso, ele é dividido em duas etapas: a **integração entre GPS e GTFS** e a **análise comparativa da acessibilidade** (Figura \ref{fig:metodologia_geral}). 
 
 
-``` {r metodologia_geral, fig.cap = "Metologia geral do trabalho"}
+``` {r metodologia_geral, fig.cap = "Metodologia geral do trabalho"}
 
 include_graphics('figure/4-metodologia_geral.png')
 ```
