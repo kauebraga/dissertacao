@@ -55,3 +55,9 @@ sfc_as_cols <- function(x, names = c("lon","lat")) {
   st_set_geometry(ui, NULL)
 }
 
+
+options(scipen=10000)
+
+`%nin%` = Negate(`%in%`)
+
+`%nlike%` = Negate(`%like%`)
