@@ -105,7 +105,9 @@ hex_agregados %>%
   # mutate(pop_total = ifelse(pop_total > 2000, 2000, pop_total)) %>%
   ggplot()+
   geom_sf(data = hex_agregados, aes(fill = pop_total), color = NA)+
-  viridis::scale_fill_viridis(option = "B", breaks = c(0, 5000, 10000), labels = c(0, 5000, 10000))+
+  viridis::scale_fill_viridis(option = "B", 
+                              breaks = c(0, 11000, 22000), 
+                              labels = c(0, 11, "22 mil"))+
   # scale_fill_gradientn(colours =  RColorBrewer::brewer.pal(9, "PuRd"), na.value = "black")+
   labs(title = "População")+
   theme_mapa() +
@@ -117,17 +119,21 @@ hex_agregados %>%
   mutate(renda_capta = ifelse(renda_capta > 3000, 3000, renda_capta)) %>%
   ggplot()+
   geom_sf(aes(fill = renda_capta), color = NA)+
-  viridis::scale_fill_viridis(option = "B", breaks = c(1, 1000, 2000, 3000), labels = c("0", "1000", "2000", "3000+"))+
+  viridis::scale_fill_viridis(option = "B", 
+                              breaks = c(1, 1500, 3000), 
+                              labels = c("0", "1,5", "+3 mil"))+
   labs(title = "Renda per capta")+
   theme_mapa() +
   theme(plot.title = element_text(vjust=-3))+
 
 hex_agregados %>%
   select(id_hex, empregos_total) %>%
-  mutate(empregos_total = ifelse(empregos_total > 3000, 3000, empregos_total)) %>%
+  mutate(empregos_total = ifelse(empregos_total > 5000, 5000, empregos_total)) %>%
   ggplot()+
   geom_sf(aes(fill = empregos_total), color = NA)+
-  viridis::scale_fill_viridis(option = "B", breaks = c(0, 1000, 2000, 3000), labels = c("0", "1000","2000", "3000+"))+
+  viridis::scale_fill_viridis(option = "B", 
+                              breaks = c(0, 2500, 5000), 
+                              labels = c("0", "2,5", "+5 mil"))+
   labs(title = "Empregos")+
   theme_mapa() +
   theme(plot.margin = unit(c(1, 0, 0, 0), "mm"),
@@ -147,7 +153,9 @@ hex_agregados %>%
   mutate(mat_total = ifelse(mat_total > 3000, 3000, mat_total)) %>%
   ggplot()+
   geom_sf(aes(fill = mat_total), color = NA)+
-  viridis::scale_fill_viridis(option = "B", breaks = c(0, 1000, 2000, 3000), labels = c("0", "1000","2000", "3000+"))+
+  viridis::scale_fill_viridis(option = "B", 
+                              breaks = c(0, 1500, 3000), 
+                              labels = c("0", "1,5","+3 mil"))+
   labs(title = "Matrículas")+
   theme_mapa() +
   theme(plot.margin = unit(c(1, 0, 0, 0), "mm"),
