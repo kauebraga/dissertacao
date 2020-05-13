@@ -362,7 +362,9 @@ for_comparacao_tt %>%
   geom_sf(data= limits, fill = NA)+
   # scale_fill_gradient2(low = "red", mid = "white", high = "blue", midpoint = 0, )+
   scale_fill_distiller(palette = "RdBu", direction = 1,
-                       limits = c(-1,1)*max(abs(for_comparacao_tt$dif_log_tc)))+
+                       limits = c(-1,1)*max(abs(for_comparacao_tt$dif_log_tc)),
+                       breaks = c(-0.5, 0, 0.5),
+                       labels = c("-50%", "0", "+50%"))+
   labs(fill = "Diferença relativa de oportunidades\n acessíveis")+
   theme_mapa()+
 
@@ -375,14 +377,16 @@ for_comparacao_tt %>%
   geom_jitter(aes(x = 1, y = dif_log, color = dif_log), alpha = 1)+
   geom_boxplot(aes(x = 1, y = dif_log), alpha = 0.1)+
   scale_color_distiller(palette = "RdBu", direction = 1,
-                        limits = c(-1,1)*max(abs(for_comparacao_tt$dif_log)))+
+                        limits = c(-1,1)*max(abs(for_comparacao_tt$dif_log_tc)))+
+  scale_y_continuous(breaks = c(-1.5, -1, -0.5, 0, 0.5, 1, 1.5),
+                      labels = c("-150%", "-100%", "-50%", "0", "50%", "100%", "150%"))+
   # scale_fill_distiller(palette = "RdBu", direction = 1)+
   #                      # limits = c(-1,1)*max(abs(for_comparacao_tt$dif_log_tc)),
   #                      breaks = c(-0.5, -0.25, 0, 0.25, 0.5),
   #                      labels = c("<-0.5", "-0.25", "0", "0.25", ">0.5")
   #                      )+
   # scale_x_continuous(breaks = c(-0.5, -0.25, 0, 0.25, 0.5), labels = c("<-0.5", "-0.25", "0", "0.25", ">0.5"))+
-  theme_ipsum_rc()+
+  theme_ipsum_rc(grid = "Y")+
   theme(plot.margin = unit(c(1, 1, 1, 1), "mm"),
         axis.title.x = element_blank(),
         axis.text.x = element_blank(),
@@ -399,9 +403,13 @@ for_comparacao_et <- acess_dif %>%
   select(origin, starts_with("CMA_ET_50")) %>%
   mutate(dif = CMA_ET_50.corrigido - CMA_ET_50.padrao) %>%
   mutate(dif_log = log(CMA_ET_50.corrigido/CMA_ET_50.padrao)) %>%
+  # substiur os Nas por zero
+  mutate(dif_log = ifelse(is.nan(dif_log), 0, dif_log)) %>%
+  mutate(dif_log = ifelse(is.infinite(dif_log), 0, dif_log)) %>%
   mutate(dif_log_tc = ifelse(dif_log > 0.5, 0.5, 
                              ifelse(dif_log < -0.5, -0.5, dif_log))) %>%
-  mutate(dif_perc_total = dif/total_matriculas)
+  mutate(dif_perc_total = dif/total_matriculas) %>%
+  mutate(dif = ifelse(dif < -30000, -30000, ifelse(dif > 30000, 30000, dif)))
 
 # comparacao nao espacial
 for_comparacao_et %>%
@@ -423,7 +431,9 @@ for_comparacao_et %>%
   geom_sf(data= limits, fill = NA)+
   # scale_fill_gradient2(low = "red", mid = "white", high = "blue", midpoint = 0, )+
   scale_fill_distiller(palette = "RdBu", direction = 1,
-                       limits = c(-1,1)*max(abs(for_comparacao_tt$dif_log_tc)))+
+                       limits = c(-1,1)*max(abs(for_comparacao_tt$dif_log_tc)),
+                       breaks = c(-0.5, 0, 0.5),
+                       labels = c("-50%", "0", "+50%"))+
   labs(fill = "Diferença relativa de oportunidades\n acessíveis")+
   theme_mapa()+
 
@@ -436,14 +446,17 @@ for_comparacao_et %>%
   geom_jitter(aes(x = 1, y = dif_log, color = dif_log), alpha = 1)+
   geom_boxplot(aes(x = 1, y = dif_log), alpha = 0.1)+
   scale_color_distiller(palette = "RdBu", direction = 1,
-                        limits = c(-1,1)*max(abs(for_comparacao_et$dif_log)))+
+                        limits = c(-1,1)*max(abs(for_comparacao_et$dif_log_tc)))+
+  scale_y_continuous(breaks = c(-1.5, -1, -0.5, 0, 0.5, 1, 1.5),
+                     labels = c("-150%", "-100%", "-50%", "0", "+50%", "+100%", "+150%"),
+                     limits = c(-1.5, 1.5))+
   # scale_fill_distiller(palette = "RdBu", direction = 1)+
   #                      # limits = c(-1,1)*max(abs(for_comparacao_tt$dif_log_tc)),
   #                      breaks = c(-0.5, -0.25, 0, 0.25, 0.5),
   #                      labels = c("<-0.5", "-0.25", "0", "0.25", ">0.5")
   #                      )+
   # scale_x_continuous(breaks = c(-0.5, -0.25, 0, 0.25, 0.5), labels = c("<-0.5", "-0.25", "0", "0.25", ">0.5"))+
-  theme_ipsum_rc()+
+  theme_ipsum_rc(grid = "Y")+
   theme(plot.margin = unit(c(1, 1, 1, 1), "mm"),
         axis.title.x = element_blank(),
         axis.title.y = element_blank(),
@@ -471,6 +484,7 @@ for_comparacao_tt %>%
   # scale_fill_gradient2(low = "red", mid = "white", high = "blue", midpoint = 0, )+
   scale_fill_distiller(palette = "RdBu", direction = 1,
                        breaks = c(-100000, 0, 100000),
+                       labels = c("-100 mil", "0", "100 mil"),
                        limits = c(-1,1)*max(abs(for_comparacao_tt$dif)))+
   labs(fill = "Diferença absoluta de oportunidades\n acessíveis para trabalho")+
   theme_mapa()+
@@ -483,7 +497,9 @@ for_comparacao_et %>%
   geom_sf(data= limits, fill = NA)+
   # scale_fill_gradient2(low = "red", mid = "white", high = "blue", midpoint = 0, )+
   scale_fill_distiller(palette = "RdBu", direction = 1,
-                       limits = c(-1,1)*max(abs(for_comparacao_et$dif)))+
+                       limits = c(-1,1)*max(abs(for_comparacao_et$dif)),
+                       breaks = c(-30000, 0, 30000),
+                       labels = c("-30 mil", 0, "30 mil"))+
   labs(fill = "Diferença absoluta de oportunidades\n acessíveis para educação")+
   theme_mapa() +
   theme(plot.margin = unit(c(1, 1, 3, 1), "mm"))+
@@ -713,7 +729,7 @@ juntos_cenario %>%
   facet_wrap(~tipo)+
   scale_fill_viridis_c(option = "B", 
                        breaks = c(4, 250000, 500000), 
-                       labels = c("0", "250000", "500000"))+
+                       labels = c("0", "250", "500 mil"))+
   labs(fill = "Quantidade de empregos\n acessíveis em 65 minutos")+
   theme_mapa() +
 
@@ -724,7 +740,7 @@ juntos_cenario %>%
   facet_wrap(~tipo)+
   scale_fill_viridis_c(option = "B", 
                        breaks = c(4, 75000, 150000),
-                       labels = c("0", "75000", "150000+")
+                       labels = c("0", "75", "150 mil")
                        )+
   labs(fill = "Quantidade de matrículas\n acessíveis em 50 minutos")+
   theme_mapa() +
@@ -743,7 +759,9 @@ juntos_cenario_tt %>%
   geom_sf(data = limits, fill = NA)+
   geom_sf(aes(fill = dif), color = NA)+
   # scale_fill_distiller(palette = "Reds", direction = 1)+
-  scale_fill_viridis_c(option = "B", direction = -1)+
+  scale_fill_viridis_c(option = "B", direction = -1,
+                       breaks = c(0, 130000, 260000),
+                       labels = c("0", "130", "260 mil"))+
   labs(fill = "Diferença absoluta de\n acessibilidade entre cenários\n(empregos)")+
   theme_mapa()+
 
@@ -752,7 +770,9 @@ juntos_cenario_et %>%
   geom_sf(data = limits, fill = NA)+
   geom_sf(aes(fill = dif), color = NA)+
   # scale_fill_distiller(palette = "Reds", direction = 1)+
-  scale_fill_viridis_c(option = "B", direction = -1)+
+  scale_fill_viridis_c(option = "B", direction = -1,
+                       breaks = c(0, 45000, 90000),
+                       labels = c("0", "45", "90 mil"))+
   labs(fill = "Diferença absoluta de\n acessibilidade entre cenários\n(educação)")+
   theme_mapa() +
   theme(plot.margin = unit(c(1, 1, 3, 1), "mm"))+
