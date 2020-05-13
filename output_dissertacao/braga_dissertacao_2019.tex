@@ -144,7 +144,7 @@
   
   Para o Sistema de Transporte Integrado de Fortaleza (SIT-FOR), esse \emph{big data} está disponível e é aliado a diferentes bases suplementares como a Especificação Geral de Feeds de Transporte Público (GTFS) e a base de endereços dos usuários, oferecendo desafios quanto à seu tratamento e integração. Dados de smartcard e GPS são volumosos, dados de GTFS podem ter informações incompletas, e dados de endereço dos usuários apresentam registros problemáticos e sem padrão. A transformação de dados cheio de ruídos para dados limpos pode ser útil para utilização dos mesmos neste trabalho e em trabalhos futuros e de outrem. Isso leva à questão de \textbf{como consolidar a base de dados de BD-TP do SIT-FOR?}
   
-  Como mencionado, nos últimos anos dados de GTFS têm sido utilizados com sucesso como uma fonte de dados para a estimação de indicadores de acessibilidade. O seu formato estruturado de dados fornece informações da oferta de transporte público que podem ser utilizadas por uma ferramenta de escolha de rota para estimar tempo de viagem entre pares origem destino. Dentre essas informações, a principal delas é o arquivo stop\_times.txt, que apresenta o horário programado de passagem em cada parada de todos os veículos, e é o que permite que o algoritmo estime a rota de menor tempo. Esses horário programados, entretanto, são valores agendados fornecidos pela agência de transporte da cidade, e é sabido que podem apresentar uma grande imprecisão \citep{Wessel2019}.
+  Como mencionado, nos últimos anos dados de GTFS têm sido utilizados com sucesso como uma fonte de dados para a estimação de indicadores de acessibilidade. O seu formato estruturado de dados fornece informações da oferta de transporte público que podem ser utilizadas por uma ferramenta de escolha de rota para estimar tempo de viagem entre pares origem destino. Dentre essas informações, a principal delas é o arquivo \emph{stop\_times.txt}, que apresenta o horário programado de passagem em cada parada de todos os veículos, e é o que permite que o algoritmo estime a rota de menor tempo. Esses horário programados, entretanto, são valores agendados fornecidos pela agência de transporte da cidade, e é sabido que podem apresentar uma grande imprecisão \citep{Wessel2019}.
   
   Dados de GPS, por outro lado, podem oferecer informações de localização de toda a frota de um sistema de transporte público. Utilizando-se de métodos computacionais e de geoprocessamento, essas localizações podem ser traduzidas em tempos de viagem entre paradas do sistema e transformadas em um formato análogo ao encontrado nos dados de GTFS. Trabalhos anteriores como \citet{Wessel2017} e \citet{Arbex2016a} realizaram essa transformação, contando com todos os dados de localização da frota.
   
@@ -156,14 +156,14 @@
   
   Os trabalhos que realizaram a reconstrução do GTFS apresentam diferenças fundamentais em relação ao SIT-FOR. O trabalho de \citet{Wessel2017} contou com dados de GPS que já apresentavam informações necessárias (diferente dos dados do SIT-FOR), enquanto que o trabalho de \citet{Arbex2016a}, apesar de utilizar dados de qualidade semelhante aos dados do SIT-FOR não detalhou completamente sua metodologia. Por fim, o SIT-FOR conta com algumas linhas e veículos que tiveram que ser descartadas da base do GPS porque não apresentaram todas as informações necessárias, trazendo maiores desafios à reconstrução. Essas considerações, somadas aos fenômenos de variabilidade da acessibilidade discutidos acima, impõe desafios na reconstrução de tabelas de horários programados de GTFS a partir dados empíricos da frota, e levam à questão de \textbf{como reconstruir horários programados do GTFS a partir de uma grande amostra de dados arquivados do GPS?}
   
-  A análise na literatura das três hipóteses de variabilidade propostas é comumente feita para atividades de emprego, que tendem a ter uma distribuição espacial mais concentrada. Entende-se, entretanto, que outras atividades (como educação) podem ter uma distribuição espacial diferente, levando a resultados diversos. É identificada então uma lacuna no tipo de atividade que é feita a análise dos indicadores.
+  A análise na literatura das três questões de variabilidade propostas é comumente feita para atividades de emprego, que tendem a ter uma distribuição espacial mais concentrada. Entende-se, entretanto, que outras atividades (como educação) podem ter uma distribuição espacial diferente, levando a resultados diferentes de variabilidade da acessibilidade. É identificada então uma lacuna no tipo de atividade que é feita a análise dos indicadores.
   
-  Paralelamente aos dados empíricos de localização da frota, dados de bilhetagem apresentam informações desagregadas sobra a demanda dos passageiros. Pouco foi feito na literatura sobre o uso desses dados na estimação da acessibilidade \citep{Arbex2016a}. No SIT-FOR, dados de bilhetagem apresentam informações do tipo de pagamento realizado (sendo os principais vale transporte e carteira de estudante), o que pode ser um indicativo do motivo da viagem. Foi identificada uma lacuna nessa temática.
+  Paralelamente aos dados empíricos de localização da frota, dados de bilhetagem apresentam informações desagregadas sobra a demanda dos passageiros, porém ainda sendo pouco utilizados na estimação da acessibilidade. \citet{Arbex2016a} utilizaram dados de bilhetagem para estimar o tempo limite a ser utilizado no indicador de acessibilidade cumulativa para empregos. No SIT-FOR, dados de bilhetagem apresentam informações do tipo de pagamento realizado (sendo os principais vale transporte e carteira de estudante), o que pode ser um indicativo do motivo da viagem. É entendido que esse uso do dado de bilhetagem ainda carece de maior consolidação, e vê-se uma lacuna na sua utilização para estimação da acessibilidade cumulativa para diferentes atividades. Juntando isso à lacuna do tipo de atividade identificada acima, pergunta-se: \textbf{como calcular indicadores cumulativos de acessibilidade a oportunidades de trabalho e educação com o apoio de dados de bilhetagem?}
   
   \hypertarget{objetivos}{%
   \section{Objetivos}\label{objetivos}}
   
-  O objetivo geral deste trabalho é \textbf{analisar a variabilidade de indicadores de acessibilidade por transporte público às oportunidades cumulativas de trabalho e educação com o uso de dados de GPS e bilhetagem no contexto da avaliação de intervenções no sistema de transportes}. Os objetivos específicos, acompanhando as questões de pesquisa, são:
+  O objetivo geral deste trabalho é \textbf{analisar a variabilidade de indicadores de acessibilidade por transporte público às oportunidades de trabalho e educação com o uso de dados de GPS e bilhetagem no contexto da avaliação de intervenções no sistema de transportes}. Os objetivos específicos, acompanhando as questões de pesquisa, são:
   
   \begin{itemize}
   \tightlist
@@ -171,6 +171,8 @@
     Consolidar e integrar bases de dados de transporte público do SIT-FOR, incluindo bilhetagem, cadastro dos usuários, GPS, GTFS;
   \item
     Propor e aplicar método para reconstrução de arquivos de GTFS a partir de dados de GPS;
+  \item
+    Calcular indicadores cumulativos de acessibilidade a oportunidades de trabalho e educação com o apoio de dados de bilhetagem;
   \item
     Verificar hipótese da diferença de acessibilidade calculada pelo GTFS programado em comparação com o GTFS corrigido pela métrica de tendência central de tempos de viagem;
   \item
@@ -186,7 +188,7 @@
   
   A ferramenta OpenTripPlanner (OPENTRIPPLANNER, 2017) é utilizada para a determinação de rotas mínimas e estimação de tempos de viagem de transporte público. A ferramenta já foi utilizada por Pereira (2018) e por Mayaud et al. (2018) para a estimação de indicadores de acessibilidade. É uma ferramenta open-source baseada na rede viária do OpenStreetMap e nos dados de transporte público dos arquivos GTFS. A ferramenta implementa um algoritmo de caminho mínimo na linguagem Java e calcula as melhores rotas a partir dos tempos de viagem programados entre as paradas da rede de transporte público.
   
-  Baseado em princípios de reprodutibilidade, todos os dados e códigos de tratamento aplicados serão publicados na página \url{https://github.com/kauebraga/dissertacao-git}. Dessa forma, qualquer pessoa pode acompanhar o andamento do projeto, dar sugestões e replicar o método utilizado para outro conjunto de dados semelhantes.
+  Baseado em princípios de reprodutibilidade, todos os dados e códigos de tratamento aplicados serão publicados na página \url{https://github.com/kauebraga/dissertacao}. Dessa forma, qualquer pessoa pode acompanhar o andamento do projeto, dar sugestões e replicar o método utilizado para outro conjunto de dados semelhantes.
   
   \hypertarget{estrutura-da-dissertacao}{%
   \section{Estrutura da dissertação}\label{estrutura-da-dissertacao}}
@@ -349,9 +351,16 @@
   Até a metade da década de 2000, a estimação de indicadores de acessibilidade por transporte público se baseava em informações simplificadas das redes de transporte \citep{Owen2015}. Muitas vezes uma rede de transporte público consistia de linhas de ônibus que tinham informações como velocidade média e frequência que possibilitavam o cálculo do tempo de viagem da linha, e a assim a estimação de tempos de viagem entre pares origem-destino. Essas simplificações podem acarretar em imprecisões no valor do indicador de acessibilidade, visto que tempos de viagem podem variar drasticamente durante o dia e entre trechos percorridos. Além disso, não conseguiam incorporar etapas importantes do deslocamento como o tempo de espera inicial e o tempo de espera por integrações \citep{Lei2010}.
   
   Pensando nessas limitações, \citet{Lei2010} estabeleceram métodos conceituais e computacionais para a utilização da tabela de horários de um sistema de transporte público para estimar com maior precisão o tempo de viagem entre pares origem destino. O trabalho buscou definir explicitamente cada etapa do deslocamento por transporte público no seu método:
-  * Primeiramente, são especificadas as coordenadas da origem e destino e o horário de partida da viagem;\\
-  * É assumido que o usuário vai caminhar do ponto de origem até a rua mais próxima;
-  * A partir dessa rua mais próxima, é calculado (através de um algoritmo Dijkstra de caminho mínimo) o menor tempo de viagem até o ponto de destino, considerando: o tempo de caminhada à parada, o tempo de espera pelo veículo, o tempo de espera por possíveis integrações, e o tempo de caminhada até o ponto de destino.
+  
+  \begin{itemize}
+  \tightlist
+  \item
+    Primeiramente, são especificadas as coordenadas da origem e destino e o horário de partida da viagem;
+  \item
+    É assumido que o usuário vai caminhar do ponto de origem até a rua mais próxima;
+  \item
+    A partir dessa rua mais próxima, é calculado (através de um algoritmo Dijkstra de caminho mínimo) o menor tempo de viagem até o ponto de destino, considerando: o tempo de caminhada à parada, o tempo de espera pelo veículo, o tempo de espera por possíveis integrações, e o tempo de caminhada até o ponto de destino.
+  \end{itemize}
   
   A viabilidade do método foi testada para um caso em Santa Bárbara, Califórnia, de onde os autores dispunham das informações da rede e dos horários do sistema de transporte público. Aplicando o algoritmo no software de geoprocessamento ArcGis, o trabalho calculou tempos de viagem de uma origem para as demais localidades da cidade.
   
@@ -432,7 +441,7 @@
   
   A principal limitação identificada no trabalho foi o método para estimar o tempo de passagem de cada veículo pelas paradas da linha. O autor associou o registro de GPS mais próximo de cada parada como sendo o horário associado, utilizando um limite de 200 metros (em distância euclidiana) para julgar se aquela associação foi válida ou não. Isso significa que um registro de GPS com até 200 metros de distância da parada pode ser utilizado, o que pode acarretar erros de estimação.
   
-  Outra limitação do método de tratamento dos dados de GPS foi que, para evitar problemas, o autor não considerou as paradas extremas (de fim e de começo da viagem). Isso pode ser problemático especialmente em áreas de terminais, onde há um grande fluxo de veículos e onde atrasos e altos tempos de viagem são comuns. Além disso, não foi deixado claro se foi estabelecido um método para identificar o sentido da viagem, ou se essa informação já seria disponibiliza automaticamente.
+  Outra limitação do método de tratamento dos dados de GPS foi que, para evitar problemas, o autor não considerou as paradas extremas (de fim e de começo da viagem). Isso pode ser problemático especialmente em áreas de terminais, onde há um grande fluxo de veículos e onde atrasos e altos tempos de viagem são comuns.
   
   Com isso, o autor pôde estimar tempos de viagem (entre zonas de tráfego) com o uso do software \emph{ArcGis} e calcular e analisar indicadores de acessibilidade, mas não fez uma análise comparativa da acessibilidade com o GTFS programado e com o GTFS empírico.
   
@@ -440,7 +449,7 @@
   
   O serviço de dados de GPS utilizado por \citet{Wessel2017} está presente em mais de 50 cidades, porém concentrado nos Estados Unidos, Canadá e Austrália (informação coletada em agosto de 2019 no site \url{https://nextbus.cubic.com/Our-Customers/Around-the-World}). Identifica-se, portanto, que a metodologia desenvolvida no trabalho de \citet{Arbex2016a} pode ser mais útil para a realidade dos demais países (especialmente países emergentes), onde a tendência é a disponibilização de dados de GPS arquivados e carentes de informações.
   
-  Outro aspecto importante a ser ressaltado é como foi feita a agregação temporal dos dados. \citet{Wessel2017} teve acesso a localização de todos os veículos do sistema por 2 dias, com exceção das linhas de alta capacidade, que o autor utilizou os dados programados. Então calcularam a acessibilidade para o serviço observado nesses dias, por fim fazendo uma acessibilidade média dessa amostra. \citet{Arbex2016a} aplicaram seu algoritmo para 20 dias úteis, mas não foi explicitado como os tempos estimados entre paradas foram agregados para um arquivo consolidado de \emph{stop\_times.txt}.
+  Outro aspecto importante a ser ressaltado é como foi feita a agregação temporal dos dados. \citet{Wessel2017} teve acesso a localização de todos os veículos do sistema por 2 dias, com exceção das linhas de alta capacidade, que o autor utilizou os dados programados. Então calcularam a acessibilidade para o serviço observado nesses dias, por fim fazendo uma acessibilidade média dessa amostra. \citet{Arbex2016a} aplicaram seu algoritmo para 20 dias úteis, mas não foi explicitado como os tempos estimados entre paradas foram agregados.
   
   Esses são os trabalhos encontrados que realizaram uma transformação de dados de localização da frota em dados \emph{stop\_times} do GTFS, trazendo informações empíricas de tempo de viagem. Outros trabalhos, apesar de não terem feito uma tradução completa dos dados de GPS em dados \emph{stop\_times}, propuseram métodos para geoprocessar dados de GPS com uso dos dados de GTFS, estimando informações importantes de serviço. Como exemplo, destaca-se o trabalho de \citet{Rabay2017}, que utilizou os dados de GPS para estimar velocidades operacionais em trechos de algumas linhas, e merece uma atenção especial.
   
@@ -512,10 +521,7 @@
   }
   \end{figure}
   
-  \hypertarget{sistema-de-bilhetagem-eletronica-e-avl-de-fortaleza}{%
-  \subsection{Sistema de Bilhetagem Eletrônica E AVL de Fortaleza}\label{sistema-de-bilhetagem-eletronica-e-avl-de-fortaleza}}
-  
-  O SIT-FOR têm um sistema aberto de bilhetagem eletrônica (usuários só validam no embarque) que registra a passagem de todos os usuários pela catraca dos veículos. Os tipos de pagamentos utilizados podem ser por bilhete único de vale transporte, carteira de estudante (mostrados na Figura \ref{fig:bu}), gratuidade de idosos, deficientes e funcionários, e inteira (pagamento por dinheiro). Já o sistema de \emph{Automated Vehicle Location} (Localização automática de veículos) consiste na presença de equipamentos de GPS em todos os veículos da frota de transporte público de Fortaleza. O sistema registra a localização de cada veículo em média a 30 segundos quando o veículo está ligado.
+  No que se refere ao seu sistema que gera o \emph{big data}, O SIT-FOR têm um sistema aberto de bilhetagem eletrônica (usuários só validam no embarque) que registra a passagem de todos os usuários pela catraca dos veículos. Os tipos de pagamentos utilizados podem ser por bilhete único de vale transporte, carteira de estudante (mostrados na Figura \ref{fig:bu}), gratuidade de idosos, deficientes e funcionários, e inteira (pagamento por dinheiro). Já o sistema de \emph{Automated Vehicle Location} (Localização automática de veículos) consiste na presença de equipamentos de GPS em todos os veículos da frota de transporte público de Fortaleza. O sistema registra a localização de cada veículo em média a 30 segundos quando o veículo está ligado.
   
   \begin{figure}[!h]
   \captionsetup{width=16cm}
@@ -528,8 +534,8 @@
   }
   \end{figure}
   
-  \hypertarget{tratamento-inicial-dos-dados}{%
-  \section{Tratamento inicial dos dados}\label{tratamento-inicial-dos-dados}}
+  \hypertarget{metodo-de-tratamento-inicial-dos-dados}{%
+  \section{Método de tratamento inicial dos dados}\label{metodo-de-tratamento-inicial-dos-dados}}
   
   O tratamento inicial dos dados busca converter os dados brutos para um formato sem informações desnecessárias e com as colunas nomeadas. A Figura \ref{fig:cons-tratamento-inicial} descreve as principais etapas.
   
@@ -544,8 +550,8 @@
   }
   \end{figure}
   
-  \hypertarget{dados-de-smartcard}{%
-  \subsection{Dados de smartcard}\label{dados-de-smartcard}}
+  \hypertarget{dados-de-bilhetagem}{%
+  \subsection{Dados de bilhetagem}\label{dados-de-bilhetagem}}
   
   Os dados brutos de bilhetagem contém 9 colunas, sendo originalmente divididos por dia. Por meio de informações fornecidas pelo órgão fornecedor dos dados, foi possível nomear as colunas de acordo com o seu conteúdo:
   
@@ -701,8 +707,8 @@
   
   A consolidação dessa base busca 1) renomear a coluna da identificação do bilhete único para o mesmo nome da bilhetagem (\texttt{id}); 2) transformar a data de nascimento em formato padrão ISO-8601 (ano-mes-dia hora:minuto:segundo).
   
-  \hypertarget{integracao-da-base-da-bilhetagem-e-gps}{%
-  \section{Integração da base da bilhetagem e GPS}\label{integracao-da-base-da-bilhetagem-e-gps}}
+  \hypertarget{metodo-proposto-de-integracao-da-base-da-bilhetagem-e-gps}{%
+  \section{Método proposto de integração da base da bilhetagem e GPS}\label{metodo-proposto-de-integracao-da-base-da-bilhetagem-e-gps}}
   
   Há uma relação de dependência mútua dos dados de bilhetagem e GPS. Os dados de bilhetagem não apresentam a localização da validação, enquanto os dados de GPS não apresentam a linha que aquele veículo está servindo naquele ponto. Dessa forma, a integração permite utilizar os dados de GPS para determinar o local mais provável de cada validação na bilhetagem e permite utilizar os dados de bilhetagem para adicionar a informação da linha a qual aquele carro está servindo no GPS.
   
@@ -778,8 +784,8 @@
   
   A base consolidada e integrada então é uma base filtrada, contando somente com os pontos que servem à linha, com a adição da coluna da \texttt{linha} e de uma outra coluna que informa se aquele ponto de GPS está na linha ou no começo/final dela.
   
-  \hypertarget{resultados}{%
-  \section{Resultados}\label{resultados}}
+  \hypertarget{aplicacao-do-metodo}{%
+  \section{Aplicação do método}\label{aplicacao-do-metodo}}
   
   O método de consolidação foi aplicada para o dados do mês de setembro de 2019 para os dados de bilhetagem e GPS e para o GTFS da primeira semana de setembro. Esse mês foi escolhido porque representa uma época mais distante das férias de julho e já incorpora mudanças operacionais importantes como a validação sendo realizada pela parte da frente do veículo (entende-se que isso motiva o usuário a validar ao entrar no ônibus, porque ele tem menos espaço para aguardar).
   
@@ -833,14 +839,14 @@
   
   A consolidação e integração dos dados tem então como resultado dados de GPS, GTFS e bilhetagem que estão próximos para a próxima etapa de determinação do método. Os dados de GPS agora contém a linha, que torna a base a par com o que é encontrado com os dados utilizados na literatura. A base da bilhetagem tem a localização das validações, que a torna pronta para os métodos posteriores. Por fim, essa etapa também mostra a limitação da amostragem dos dados que vai guiar os processos daqui pra frente.
   
-  \hypertarget{metodo-para-analise-da-variabilidade-da-acessibilidade-por-transporte-publico-com-o-uso-de-big-data}{%
-  \chapter{\texorpdfstring{Método para análise da variabilidade da acessibilidade por transporte público com o uso de \emph{big data}}{Método para análise da variabilidade da acessibilidade por transporte público com o uso de big data}}\label{metodo-para-analise-da-variabilidade-da-acessibilidade-por-transporte-publico-com-o-uso-de-big-data}}
+  \hypertarget{proposta-metodologica-para-analise-da-variabilidade-da-acessibilidade}{%
+  \chapter{Proposta metodológica para análise da variabilidade da acessibilidade}\label{proposta-metodologica-para-analise-da-variabilidade-da-acessibilidade}}
   
   Esse capítulo busca estabelecer métodos para alcançar os três últimos objetivos do trabalho. Para isso, ele é dividido em duas etapas: a \textbf{integração entre GPS e GTFS} e a \textbf{análise comparativa da acessibilidade} (Figura \ref{fig:metodologia_geral}).
   
   \begin{figure}[!h]
   \captionsetup{width=16cm}
-  \Caption{\label{fig:metodologia_geral}Metologia geral do trabalho}
+  \Caption{\label{fig:metodologia_geral}Metodologia geral do trabalho}
   \centering
   \UFCfig{}{
   {\includegraphics[width=16cm, keepaspectratio]{figure/4-metodologia_geral.png}}
@@ -1141,8 +1147,8 @@
   
   A implementação da metodologia proposta traz alguns desafios, sendo o principal de ordem computacional. O processamento dos dados de GPS (já separados por dia) pode ser feito em um computador pessoal, mas etapas como a agregação dos tempos de viagens de todos os dias e a estimação das matrizes de tempo de viagem entre pares origem-destino requer máquinas de médio/alto poder de processamento para uma geração de resultados em um tempo razoável. Esse alto tempo de processamento somado ao cronograma limitado de uma pesquisa de mestrado levou à tomada de decisões que impuseram limites à metodologia do trabalho, como destacado acima no \emph{tradeoff} entre a resolução espacial e a resolução temporal da análise. A implementação da metodologia acontece no próximo capítulo.
   
-  \hypertarget{resultados-1}{%
-  \chapter{Resultados}\label{resultados-1}}
+  \hypertarget{discussao-dos-resultados}{%
+  \chapter{Discussão dos resultados}\label{discussao-dos-resultados}}
   
   Este capítulo busca alcançar os três últimos objetivos do trabalho, mostrando os principais resultados advindos da aplicação do método do capítulo anterior e a importância do mesmo. Os resultados são apresentados e as hipóteses são discutidas individualmente, analisando o impacto da variabilidade da acessibilidade na avaliação de políticas públicas. Por fim, é feita uma discussão geral dos resultados com a análise de como os resultados encontrados nesse capítulo se diferem dos encontrados na literatura.
   
@@ -1270,8 +1276,8 @@
   
   Com as matrizes de tempo de viagem estimadas, parte-se para o cálculo dos indicadores de acessibilidade. Primeiramente, entretanto, é necessário estimar os tempos limites a serem utilizados.
   
-  \hypertarget{estimacao-dos-tempo-limite-a-partir-da-bilhetagem}{%
-  \subsection{Estimação dos tempo limite a partir da bilhetagem}\label{estimacao-dos-tempo-limite-a-partir-da-bilhetagem}}
+  \hypertarget{estimacao-dos-tempos-limite-a-partir-da-bilhetagem}{%
+  \subsection{Estimação dos tempos limite a partir da bilhetagem}\label{estimacao-dos-tempos-limite-a-partir-da-bilhetagem}}
   
   A distribuição dos tempos de viagem estimados de cada usuários para os motivos trabalho (utilizaram vale transporte) e educação (utilizaram carteira de estudante) é mostrada na Figura \ref{fig:bi_tt_bp}. No total, foi coletada uma amostra em hora pico de 65 mil viagens para motivo trabalho e 10 mil viagens para motivo educação. Como esperado, a distribuição do tempo de viagem para trabalho tende a valores maiores que para viagens de educação. Como determinado na metodologia, será utilizado o percentil 75 como o tempo limite do indicador respectivo de cada atividade. Pelo gŕáfico, é identificado que esse valor é aproximadamente \textbf{65 minutos} para trabalho e \textbf{50 minutos} para educação.
   
@@ -1332,7 +1338,7 @@
   }
   \end{figure}
   
-  Analisando espacialmente como isso acontece, a Figura \ref{fig:h1_et_map} distribui a diferença relativa (os valores extremos foram encurtados para +- 50\%). Como observado, a diferença tende a ser menor nas áreas de maior concentração de atividades de educação - no eixo oeste da cidade - pelo mesmo motivo das atividade de trabalho. Valores extremos de diferença continuaram sua tendência de estarem nas bordas. O isolamento espacial somado à baixa frequência de transporte público deixa a acessibilidade dessas zonas muito suscetíveis à variações na chegada e no tempo de deslocamento dos ônibus - que é o que acontece quando é utilizado o GTFS corrigido em vez do programado. A acessibilidade para educação apresenta uma variação menor, com mediana de +3\%, percentil 25 de -5\% e percentil 75 de 12\%.
+  Analisando espacialmente como isso acontece, a Figura \ref{fig:h1_et_map} distribui a diferença relativa (os valores extremos no mapa foram encurtados para +- 50\%). Como observado, a diferença tende a ser menor nas áreas de maior concentração de atividades de educação - no eixo oeste da cidade - pelo mesmo motivo das atividade de trabalho. Valores extremos de diferença continuaram sua tendência de estarem nas bordas. O isolamento espacial somado à baixa frequência de transporte público deixa a acessibilidade dessas zonas muito suscetíveis à variações na chegada e no tempo de deslocamento dos ônibus - que é o que acontece quando é utilizado o GTFS corrigido em vez do programado. A acessibilidade para educação apresenta uma variação menor, com mediana de +3\%, percentil 25 de -5\% e percentil 75 de 12\%.
   
   \begin{figure}[!h]
   \captionsetup{width=16cm}
@@ -1376,6 +1382,8 @@
   \Fonte{Elaborada pelo autor}
   }
   \end{figure}
+  
+  Os resultados também confirmam uma limitação que foi levantada no capítulo anterior: a do tamanho da amostra de horas de partida. Para a maioria das localidades, especialmente as zonas mais centrais, que tem uma boa frequência de serviço, é entendido que essa amostra a cada 15 minutos satisfaz. Porém, essa limitação é mais clara na análise da diferença relativa de acessibilidade entre os cenários da hipótese 1, para as zonas mais periféricas. Uma amostra maior (a cada 5 minutos, por exemplo) tenderia a suavizar e consolidar os valores de variação para as zonas mais distantes (que têm uma menor frequência de transporte público).
   
   É possível analisar como a utilização de dados empíricos da frota poderia impactar a tomada de decisões em intervenções no sistema de transporte. Como observado, para trabalho, dados de GTFS Programado tendem a superestimar a acessibilidade em zonas de entrada do centro da cidade em até 100 mil empregos. Intervenções e análises a partir desses dados tenderiam a superestimar esses valores, podendo levar à decisões de intervenções equivocadas. Um exemplo que pode ser dado é sobre a questão de intervir construindo um corredor misto de transporte em vez de um corredor exclusivo de ônibus. Num contexto de horários programados, uma análise \emph{ex-post} poderia concluir que houve ganhos de acessibilidade bem semelhantes entre as alternativas, visto que os horários programados tendem a não incorporar informações de \emph{bus bunching} e consequentes atrasos. Quando horários empíricos são incorporados, a diferença entre um cenário de tráfego misto e tráfego exclusivo só de ônibus tende a ser incorporada de forma mais correta.
   
@@ -1462,17 +1470,8 @@
   
   Num contexto de análise das intervenções, o teste da hipótese mostra a importância de se levar em consideração diversos tempos de partida nas avaliações. O impacto da utilização de poucos horários de partida na avaliação é pequeno para áreas que têm alta frequência de transporte público, mas pode ser decisivo para áreas de baixa frequência.
   
-  \hypertarget{discussoes-gerais}{%
-  \section{Discussões gerais}\label{discussoes-gerais}}
-  
-  A etapa da reconstrução da tabela de horários \emph{stop\_times.txt} utilizou uma amostra de dados de GPS que foi advinda da etapa de consolidação. Essa amostra já contava com a exclusão de algumas linhas integralmente (principalmente linhas complementares) e outras parcialmente. Na metodologia, os tempos de viagem coletados foram agrupados por intervalo de 15 minutos e trecho, e 17\% tiveram uma amostra menor que 10 observações e foram deletadas. Essas duas situações de descarte de amostra tendem a ter um viés, visto que ocorrem em locais periféricos de menor frequência. Para esses casos (trechos) onde não foi possível estimar o tempo de viagem, foi utilizado o valor programado do GTFS. Isso pode ser identificado como a principal limitação nessa etapa do trabalho.
-  
-  Os resultados encontrados mostram a importância que os horários empíricos e sua dispersão tem na variabilidade da acessibilidade quando a distribuição de diferentes atividades são levadas em consideração. As atividades de trabalho são mais concentradas no centro da cidade, o que ocasiona um grande fluxo no sentido periferia-centro, que leva a altos e imprevisíveis tempos de viagens por transporte público. Assim, os veículos têm uma pontualidade menor (causando os resultados mostrados na hipótese 1) e uma variabilidade no tempo de viagem maior (causando os resultados mostrados na hipótese 2). Quando as atividades de educação são consideradas, acontece uma inversão no cenário. Essas atividades, menos concentradas na região central, assumem fluxos de acesso em sentidos opostos ao do pico trabalho da manhã, resultando em vias de acesso menos congestionadas e mais previsíveis. Isso é refletido na avaliação da hipótese 2 para essa atividade: a maior pontualidade dos veículos leva a uma menor variação entre os cenários.
-  
-  Os resultados também confirmam uma limitação que foi levantada no capítulo anterior: a do tamanho da amostra de horas de partida. Para a maioria das localidades, especialmente as zonas mais centrais, que tem uma boa frequência de serviço, é entendido que essa amostra a cada 15 minutos satisfaz. Porém, essa limitação é mais clara na análise da diferença relativa de acessibilidade entre os cenários da hipótese 1, para as zonas mais periféricas. Uma amostra maior (a cada 5 minutos, por exemplo) tenderia a suavizar e consolidar os valores de variação para as zonas mais distantes (que têm uma menor frequência de transporte público).
-  
   \hypertarget{comparacao-com-resultados-encontrados-na-literatura}{%
-  \subsection{Comparação com resultados encontrados na literatura}\label{comparacao-com-resultados-encontrados-na-literatura}}
+  \section{Comparação com resultados encontrados na literatura}\label{comparacao-com-resultados-encontrados-na-literatura}}
   
   Como visto nas Figuras \ref{fig:resultado_correcao_gtfs} e \ref{fig:resultado_otp}, há uma simetria entre horários programados x corrigidos e tempos estimados entre pares de origem destino a partir do GTFS Programado x GTFS Corrigido. Esse resultado é semelhante ao encontrado pelo trabalho de \citet{Wessel2019}, que fez a mesma avaliação para quatro sistemas de transporte público diferentes da América do Norte.
   
@@ -1482,8 +1481,8 @@
   
   A comparação com o encontrado na literatura para essas duas hipóteses só foi possível para atividades de emprego, visto que foi essa a atividade que os trabalhos analisaram. Para oportunidades de educação, essas distribuições tendem a variar mais, levantando à questão de como esses mesmo indicadores se comportariam para essa atividade em diferentes cidades. No que diz respeito à hipótese 2, não foi encontrado um trabalho que tenha se proposto a analisar a variação da acessibilidade em virtude da dispersão do tempo de viagem dos veículos.
   
-  \hypertarget{conclusao}{%
-  \chapter{Conclusão}\label{conclusao}}
+  \hypertarget{conclusoes-e-recomendacoes}{%
+  \chapter{Conclusões e recomendações}\label{conclusoes-e-recomendacoes}}
   
   Esse trabalho de mestrado teve como objetivo geral analisar a variabilidade de indicadores de acessibilidade por transporte público às oportunidades cumulativas de trabalho e educação com o uso de big data no contexto da avaliação de intervenções no sistema de transportes. Esse objetivo geral foi dividido em cinco objetivos específicos de pesquisa.
   
@@ -1497,6 +1496,8 @@
   
   Sabendo que essas tabelas de horários não representavam todas as linhas e veículos, foi então proposta uma agregação das mesmas. Para isso, todos os horários de passagem foram agregados para os trechos entre paradas e intervalos de 15 minutos mais próximos. Essa agregação, buscando avaliar o efeito da variação do tempo de viagem do sistema na acessibilidade, foi feita para duas medidas: a mediana dos tempos de viagem (P50) e o percentil 85 (P85). Então, para cada trecho percorrido em cada intervalo de 15 minutos, teve-se como resultado uma coluna informando o tempo mediano e uma coluna informando o tempo do percentil 85 do tempo de viagem no trecho e intervalo.
   
+  A etapa da reconstrução da tabela de horários \emph{stop\_times.txt} utilizou uma amostra de dados de GPS que foi advinda da etapa de consolidação. Essa amostra já contava com a exclusão de algumas linhas integralmente (principalmente linhas complementares) e outras parcialmente. Na agregação descrita acima, 17\% dos trechos e intervalos tiveram uma amostra menor que 10 observações de tempo de viagem, e foram deletadas. Essas duas situações de descarte de amostra tendem a ter um viés, visto que ocorrem em locais periféricos de menor frequência. Para esses casos (trechos) onde não foi possível estimar o tempo de viagem, foi utilizado o valor programado do GTFS. Isso pode ser identificado como a principal limitação nessa etapa do trabalho.
+  
   Os três últimos objetivos buscavam comprovar a importância do método estabelecido, e para isso foram testadas três hipóteses para acessibilidade por transporte público: 1) há diferença entre a acessibilidade estimada pelo GTFS Programado em relação ao GTFS Corrigido (P50); 2) há diferença entre a acessibilidade estimada pelos tempos de viagem medianos (P50) e de percentil 85 (P85); 3) há diferença entre a acessibilidade para diferentes tempos de partida de viagem. O método estabelecido anteriormente foi então aplicado para 1 mês de registro de GPS de Fortaleza, com a posterior aplicação de um algoritmo para a estimação do tempo de viagem entre cada par origem-destino para cada GTFS produzido e para 5 horários de partida em hora pico (05:45, 06:00, 06:15, 06:30 e 06:45).
   
   Essas hipóteses foram então testadas para acessibilidade para trabalho e educação com o uso de um indicador cumulativo de oportunidades. Foi proposta a utilização dos dados de bilhetagem para a estimação do tempo limite a ser utilizados nos indicadores. A partir desses dados foram estimadas as origens e destinos das viagens por motivo trabalho (viagens feitas com vale transporte) e por motivo educação (viagens feitas com carteira de estudante). Utilizando a mediana dos tempos de viagem calculados entre pares-origem destino do OTP, foi então calculada a distribuição dos tempos de viagem realizados para viagens por vale transporte e carteira de estudante. Por fim, os percentis 75 desses tempos foram utilizados para definir os tempos limites, resultando em 65 minutos para trabalho e 50 minutos para educação. Os indicadores de acessibilidade foram então estimados.
@@ -1506,6 +1507,8 @@
   Para a hipótese 2, primeiramente foi observado visualmente que há uma diferença de acessibilidade para empregos entre os cenários P50 e P85. Em seguida, foi mapeado a diferença absoluta de acessibilidade que a imprevisibilidade do sistema pode causar: há uma aglomeração de hexágonos que possui diferenças de até 200 mil empregos acessíveis para os cenários diferentes. Foi mostrado como isso acontece a partir da análise de uma agregação individualmente, mostrando que essa grande diferença de acesso absoluto acontece porque o sistema de transportes mais carregado (P85) leva o usuário a deixar de acessar as principais zonas de empregos da cidade (dentro do tempo limite de 65 minutos).
   
   Por fim, a hipótese 3 foi testada através do cálculo do coeficiente de variação da acessibilidade para empregos e educação para os horários de partida (n = 5 para hora pico). Foi mostrado que a variação tende a aumentar quando se distancia dos corredores de ônibus e de zonas de alta frequência de serviço. Isso indica que a frequência tem um papel importante na acessibilidade, diminuindo consideravelmente o tempo de espera dos usuários.
+  
+  Os resultados encontrados mostram a importância que os horários empíricos e sua dispersão tem na variabilidade da acessibilidade quando a distribuição de diferentes atividades são levadas em consideração. As atividades de trabalho são mais concentradas no centro da cidade, o que ocasiona um grande fluxo no sentido periferia-centro, que leva a altos e imprevisíveis tempos de viagens por transporte público. Assim, os veículos têm uma pontualidade menor (causando os resultados mostrados na hipótese 1) e uma variabilidade no tempo de viagem maior (causando os resultados mostrados na hipótese 2). Quando as atividades de educação são consideradas, acontece uma inversão no cenário. Essas atividades, menos concentradas na região central, assumem fluxos de acesso em sentidos opostos ao do pico trabalho da manhã, resultando em vias de acesso menos congestionadas e mais previsíveis. Isso é refletido na avaliação da hipótese 2 para essa atividade: a maior pontualidade dos veículos leva a uma menor variação entre os cenários.
   
   A análise das hipóteses finalizou com a demonstração de como as variações encontradas na acessibilidade podem impactar os tomadores de decisões em avaliações de intervenções de transporte. Foi argumentado que o uso de horários programados ou o uso de horários empíricos medianos podem levar à superestimação de intervenções baseadas em métricas de acessibilidade. Indo adiante, a utilização desses dados também pode levar a decisões equivocadas de intervenções, optando por alternativas que não levem em consideração a falta de previsibilidade do sistema.
   
@@ -1531,7 +1534,9 @@
   Os dados de GTFS de Fortaleza são do tipo \emph{stop\_times}, que contam com uma tabela de horários do transporte público. Outro tipo de GTFS, baseado em um arquivo \emph{frequency}, são ainda mais aproximados e sujeitos a erros que os anteriores. O arquivo \emph{frequency} apresenta informações de frequência programada da linha (headway previsto), e os tempos de viagem entre as paradas das linhas são considerados os mesmo para todos os horários. Nesse caso, é necessário construir completamente o arquivo \emph{stop\_times}, não somente reconstruir. Assim, a contribuição dos dados de GPS é maior ainda.
   
   Espera-se também que os códigos disponibilizados no Github sirvam para facilitar a reprodutibilidade do método. É necessário algum conhecimento na linguagem de programação R para poder adaptar diferentes casos para o código desenvolvido para Fortaleza, mas entende-se que uma pessoa com um conhecimento intermediário seja capaz de reproduzi-lo.
-  \#\# Qualidade e disponibilidade de dados de transporte público
+  
+  \hypertarget{qualidade-e-disponibilidade-de-dados-de-transporte-publico}{%
+  \section{Qualidade e disponibilidade de dados de transporte público}\label{qualidade-e-disponibilidade-de-dados-de-transporte-publico}}
   
   O principal problema dessa pesquisa diz respeito à integração das diversas bases de transporte público. Como foi visto na etapa de consolidação, as duas principais bases (bilhetagem e GPS) apresentavam identificadores únicos de veículo com numerações diferentes. Para localizar as validações ou para estimar a linha do GPS, é necessário que esses números tenham correspondência. Existe uma base que permite fazer essa integração, mas que acaba deixando muitos veículos de fora. Essa falha na integração faz com que o big data represente agora uma amostra do sistema, e não a mais a população diária tanto dos dados da demanda como dos dados da oferta. E uma amostra, claro, sempre trás consigo um viés, que não foi analisado neste trabalho.
   
