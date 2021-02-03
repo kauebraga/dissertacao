@@ -122,7 +122,7 @@ hex_agregados %>%
   viridis::scale_fill_viridis(option = "B", 
                               breaks = c(1, 1500, 3000), 
                               labels = c("0", "1,5", "+3 mil"))+
-  labs(title = "Renda per capta")+
+  labs(title = "Renda per capita")+
   theme_mapa() +
   theme(plot.title = element_text(vjust=-3))+
 

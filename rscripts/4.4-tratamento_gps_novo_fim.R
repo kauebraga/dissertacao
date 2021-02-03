@@ -115,7 +115,7 @@ gps_para_paradas <- function(gps_com_linhas) {
       #   mutate(em_linha = ifelse(tempo < 200, 0, 1)) %>%
       #   # Criar grupos toda vez que o tempo for mais que 200
       #   mutate(idx = cumsum((em_linha == 1L)))
-        
+      
       # TENTATIVA FRUSTRADA DE INTERPOLACAO INTERPOLACAO ANTES:
       
       # seqlast <- function (from, to, by) 
@@ -236,7 +236,7 @@ gps_para_paradas <- function(gps_com_linhas) {
         mutate(que = quantiles_zero_out(dif, 0.85)) %>%
         ungroup()
       
-        
+      
       # Eu preciso fazer isso para identificar o sentido da viagem!
       vamos_v3 <- vamos_v2 %>%
         # Criar bloco de paradas: cada stop_sequence unico tera um identificador unico
@@ -283,7 +283,7 @@ gps_para_paradas <- function(gps_com_linhas) {
         # Adicionar id da viagem
         mutate(viagem = rleid(sentido))
       
-        # Consertar as inconsistencias e refazer o bloco
+      # Consertar as inconsistencias e refazer o bloco
       vamos_v4 <- vamos_v3 %>%
         mutate(stop_sequence = as.character(stop_sequence)) %>%
         # Deletar viagens que tenham poucos registros (provavelmente erroneas!)
@@ -296,12 +296,12 @@ gps_para_paradas <- function(gps_com_linhas) {
         # Refazer as viagens
         mutate(viagem = rleid(viagem))
       
-
+      
       # ATENCAO: ------------------------------------------------------------------------------------
       # SE QUISER QUE O OUTPUT SEJA O DADO DE GPS COMPLETO COM AS INFORMACOES DE SENTIDO E VIAGEM,
       # DESCOMENTAR O CODIGO ABAIXO. ESSE DADO EH MAIS ADEQUADA PRA FAZER A INTERPOLACAO.
       # OBRIGADO
-        
+      
       # Quando comecam e terminam as viagens?
       pontos_de_incio_e_fim <- vamos_v4 %>%
         # Separar somente a primeira e ultima viagem
@@ -314,23 +314,23 @@ gps_para_paradas <- function(gps_com_linhas) {
         group_by(sentido, viagem) %>%
         mutate(stop_sequence = c("inicio", "fim")) %>%
         ungroup()
-
+      
       pontos_de_incio_e_fim_v1 <- pontos_de_incio_e_fim %>%
         spread(stop_sequence, id_gps_carro) %>%
         arrange(viagem)
-
+      
       # Agora, voltar pro meu gps de carros..
       gps_com_sentido_e_viagem <- gps_carro %>%
         left_join(pontos_de_incio_e_fim, by = "id_gps_carro")
-
+      
       # Selecionar so as observacoes que estao entre o inicio e o fim determinado la em cima
       gps_final <- setDT(gps_com_sentido_e_viagem)[id_gps_carro %inrange% 
                                                      pontos_de_incio_e_fim_v1[, c("inicio", "fim")]] %>%
         fill(sentido, viagem) %>%
         mutate(linha_sentido = paste0(linha.x, "-", substr(toupper(sentido), 1, 1))) %>%
         select(id_gps, linha_sentido, vehicleid, hora, viagem, stop_sequence, lon, lat)
-        
-      }
+      
+    }
     
     safe_por_carro <- possibly(por_carro, otherwise = NA_real_)
     tudo_carros <- map(carros_vai_1, safe_por_carro)
@@ -353,7 +353,7 @@ gps_para_paradas <- function(gps_com_linhas) {
   data_out <- str_extract(gps_com_linhas, "\\d{4}-\\d{2}-\\d{2}")
   path_out <- sprintf("../data/gps_com_sentido/gps_com_sentido_%s.rds", data_out)
   write_rds(tudo_linhas, path_out)
-    
+  
 }
 
 
